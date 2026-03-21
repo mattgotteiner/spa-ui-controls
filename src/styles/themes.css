@@ -1,0 +1,69 @@
+:root {
+  color-scheme: light;
+}
+
+.theme-dark {
+  --spa-color-bg: #111827;
+  --spa-color-surface: #1f2937;
+  --spa-color-surface-elevated: #243041;
+  --spa-color-border: #334155;
+  --spa-color-border-muted: #475569;
+  --spa-color-text: #f3f4f6;
+  --spa-color-text-secondary: #d1d5db;
+  --spa-color-text-muted: #94a3b8;
+  --spa-color-primary: #60a5fa;
+  --spa-color-primary-hover: #93c5fd;
+  --spa-color-danger: #f87171;
+  --spa-color-danger-hover: #fca5a5;
+  --spa-color-success: #4ade80;
+  --spa-color-warning: #fbbf24;
+  --spa-color-focus-ring: rgba(96, 165, 250, 0.25);
+  --spa-color-overlay: rgba(2, 6, 23, 0.6);
+  --spa-color-banner-info-bg: #172554;
+  --spa-color-banner-info-border: #1d4ed8;
+  --spa-color-banner-info-text: #bfdbfe;
+  --spa-color-banner-success-bg: #052e16;
+  --spa-color-banner-success-border: #166534;
+  --spa-color-banner-success-text: #bbf7d0;
+  --spa-color-banner-warning-bg: #451a03;
+  --spa-color-banner-warning-border: #b45309;
+  --spa-color-banner-warning-text: #fcd34d;
+  --spa-color-banner-danger-bg: #450a0a;
+  --spa-color-banner-danger-border: #b91c1c;
+  --spa-color-banner-danger-text: #fecaca;
+  color-scheme: dark;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not(.theme-light):not(.theme-dark) {
+    --spa-color-bg: #111827;
+    --spa-color-surface: #1f2937;
+    --spa-color-surface-elevated: #243041;
+    --spa-color-border: #334155;
+    --spa-color-border-muted: #475569;
+    --spa-color-text: #f3f4f6;
+    --spa-color-text-secondary: #d1d5db;
+    --spa-color-text-muted: #94a3b8;
+    --spa-color-primary: #60a5fa;
+    --spa-color-primary-hover: #93c5fd;
+    --spa-color-danger: #f87171;
+    --spa-color-danger-hover: #fca5a5;
+    --spa-color-success: #4ade80;
+    --spa-color-warning: #fbbf24;
+    --spa-color-focus-ring: rgba(96, 165, 250, 0.25);
+    --spa-color-overlay: rgba(2, 6, 23, 0.6);
+    --spa-color-banner-info-bg: #172554;
+    --spa-color-banner-info-border: #1d4ed8;
+    --spa-color-banner-info-text: #bfdbfe;
+    --spa-color-banner-success-bg: #052e16;
+    --spa-color-banner-success-border: #166534;
+    --spa-color-banner-success-text: #bbf7d0;
+    --spa-color-banner-warning-bg: #451a03;
+    --spa-color-banner-warning-border: #b45309;
+    --spa-color-banner-warning-text: #fcd34d;
+    --spa-color-banner-danger-bg: #450a0a;
+    --spa-color-banner-danger-border: #b91c1c;
+    --spa-color-banner-danger-text: #fecaca;
+    color-scheme: dark;
+  }
+}
