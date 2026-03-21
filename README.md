@@ -43,3 +43,52 @@ import 'spa-ui-controls/styles.css'
 ```
 
 Wrap your app with `ThemeProvider`, then use `ThemeToggle` and the shell primitives to keep layout and appearance consistent across apps.
+
+## Installing from GitHub Packages
+
+This package is published to GitHub Packages as `@mattgotteiner/spa-ui-controls`.
+
+Log in for the `@mattgotteiner` scope and keep the default npm registry pointed at npmjs.org. That way, npm continues installing public packages from npm while resolving `@mattgotteiner/*` packages from GitHub Packages.
+
+### Local install
+
+1. Log in to the GitHub npm registry for the package scope:
+
+   ```bash
+   npm login --scope=@mattgotteiner --auth-type=legacy --registry=https://npm.pkg.github.com
+   ```
+
+2. Install the package:
+
+   ```bash
+   npm install @mattgotteiner/spa-ui-controls
+   ```
+
+This login flow scopes GitHub Packages access to `@mattgotteiner/*`, so installs such as `react` or `@babel/core` still resolve from the public npm registry. Do not commit tokens or a tokenized `.npmrc` file into the repository.
+
+### GitHub Actions CI flow
+
+For CI, grant the consuming repository access to the package in GitHub first, then configure the workflow to read packages.
+
+```yaml
+permissions:
+  contents: read
+  packages: read
+
+steps:
+  - uses: actions/checkout@v4
+
+  - uses: actions/setup-node@v4
+    with:
+      node-version: 22
+      scope: '@mattgotteiner'
+      registry-url: 'https://npm.pkg.github.com'
+
+  - run: npm ci
+    env:
+      NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+```
+
+With the scoped registry configuration above, npm will still use the public npm registry for unscoped packages and GitHub Packages only for `@mattgotteiner/*`.
+
+If the package lives outside the workflow repository and `GITHUB_TOKEN` is not allowed to read it, create a repository secret with a token that has package read access and use that secret for `NODE_AUTH_TOKEN` instead.
