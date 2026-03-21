@@ -1,9 +1,20 @@
 {
-  "name": "spa-ui-controls",
+  "name": "@mattgotteiner/spa-ui-controls",
   "version": "0.1.0",
-  "private": true,
+  "private": false,
   "description": "Reusable React UI controls and design tokens for small SPA test apps",
   "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mattgotteiner/spa-ui-controls.git"
+  },
+  "bugs": {
+    "url": "https://github.com/mattgotteiner/spa-ui-controls/issues"
+  },
+  "homepage": "https://github.com/mattgotteiner/spa-ui-controls#readme",
+  "publishConfig": {
+    "registry": "https://npm.pkg.github.com"
+  },
   "type": "module",
   "files": [
     "dist"

@@ -38,8 +38,8 @@ import {
   AppShell,
   TopBar,
   Panel,
-} from 'spa-ui-controls'
-import 'spa-ui-controls/styles.css'
+} from '@mattgotteiner/spa-ui-controls'
+import '@mattgotteiner/spa-ui-controls/styles.css'
 ```
 
 Wrap your app with `ThemeProvider`, then use `ThemeToggle` and the shell primitives to keep layout and appearance consistent across apps.
@@ -65,6 +65,12 @@ Log in for the `@mattgotteiner` scope and keep the default npm registry pointed 
    ```
 
 This login flow scopes GitHub Packages access to `@mattgotteiner/*`, so installs such as `react` or `@babel/core` still resolve from the public npm registry. Do not commit tokens or a tokenized `.npmrc` file into the repository.
+
+### Publishing from `main`
+
+Pushes to `main` automatically publish this package to the `@mattgotteiner` GitHub Packages feed.
+
+The workflow builds, lints, and tests the package before publishing. Each `main` publish gets a unique version based on the base package version, using the format `0.1.0-main.<run-number>`, so every merge can publish without needing a manual version bump first.
 
 ### GitHub Actions CI flow
 
