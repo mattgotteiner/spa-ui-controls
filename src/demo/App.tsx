@@ -4,8 +4,8 @@ import { AppShell } from '../components/AppShell'
 import { Banner } from '../components/Banner'
 import { Button } from '../components/Button'
 import { FormField } from '../components/FormField'
-import { IconButton } from '../components/IconButton'
 import { Panel } from '../components/Panel'
+import { SettingsButton } from '../components/SettingsButton'
 import { SettingsDrawer } from '../components/SettingsDrawer'
 import { Sidebar } from '../components/Sidebar'
 import { ThemeToggle } from '../components/ThemeToggle'
@@ -80,9 +80,7 @@ function DemoSurface() {
             trailing={
               <div className="demo-topbar-actions">
                 <ThemeToggle onChange={setTheme} value={theme} />
-                <IconButton label="Open settings" onClick={() => setIsSettingsOpen(true)}>
-                  S
-                </IconButton>
+                <SettingsButton variant="topbar" onClick={() => setIsSettingsOpen(true)} />
               </div>
             }
           />
