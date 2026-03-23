@@ -43,14 +43,12 @@ import {
 import '@mattgotteiner/spa-ui-controls/styles.css'
 ```
 
-Wrap your app with `ThemeProvider`, then use `ThemeToggle`, `SettingsButton`, and the shell primitives to keep layout and appearance consistent across apps.
-
-For the boxed top-bar treatment used in apps like `tokenizer`, opt into the shared header style directly:
+Wrap your app with `ThemeProvider`, then use `ThemeToggle`, `SettingsButton`, and the shell primitives to keep layout and appearance consistent across apps. `SettingsButton` now ships with the boxed treatment by default, so consumers do not need a special top-bar variant:
 
 ```tsx
 <TopBar
   title="My app"
-  trailing={<SettingsButton variant="topbar" onClick={() => setIsSettingsOpen(true)} />}
+  trailing={<SettingsButton onClick={() => setIsSettingsOpen(true)} />}
 />
 ```
 

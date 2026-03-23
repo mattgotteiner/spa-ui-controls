@@ -6,7 +6,9 @@ describe('SettingsButton', () => {
   it('renders an icon button with the default label', () => {
     render(<SettingsButton />)
 
-    expect(screen.getByRole('button', { name: 'Open settings' })).toBeInTheDocument()
+    expect(screen.getByRole('button', { name: 'Open settings' })).toHaveClass(
+      'spa-settings-button',
+    )
   })
 
   it('calls onClick when pressed', () => {
@@ -23,11 +25,4 @@ describe('SettingsButton', () => {
     expect(container.querySelector('.spa-settings-button__badge')).toBeInTheDocument()
   })
 
-  it('adds the topbar variant class when requested', () => {
-    render(<SettingsButton variant="topbar" />)
-
-    expect(screen.getByRole('button', { name: 'Open settings' })).toHaveClass(
-      'spa-settings-button--topbar',
-    )
-  })
 })
