@@ -85,6 +85,10 @@ Pushes to `main` automatically publish this package to the `@mattgotteiner` GitH
 
 The workflow builds, lints, and tests the package before publishing. Each `main` publish gets a unique version based on the base package version, using the format `0.1.0-main.<run-number>`, so every merge can publish without needing a manual version bump first.
 
+### Pull request CI
+
+Pull requests targeting `main` automatically run `lint`, `typecheck`, `test:run`, and `build` through `.github/workflows/ci.yml`.
+
 ### GitHub Actions CI flow
 
 For CI, grant the consuming repository access to the package in GitHub first, then configure the workflow to read packages.
