@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState, type ReactNode } from 'react'
+import { useCallback, useEffect, useMemo, useState, type ReactNode } from 'react'
 import { applyThemeClass } from './applyThemeClass'
 import { ThemeContext } from './ThemeContext'
 import type { ResolvedTheme, ThemeMode } from './types'
@@ -29,24 +29,40 @@ function getInitialTheme(initialTheme: ThemeMode, storageKey: string, persist: b
 export interface ThemeProviderProps {
   children: ReactNode
   initialTheme?: ThemeMode
+  onThemeChange?: (theme: ThemeMode) => void
   persist?: boolean
   storageKey?: string
+  theme?: ThemeMode
 }
 
 export function ThemeProvider({
   children,
   initialTheme = 'system',
+  onThemeChange,
   persist = true,
   storageKey = DEFAULT_STORAGE_KEY,
+  theme: controlledTheme,
 }: ThemeProviderProps) {
-  const [theme, setTheme] = useState<ThemeMode>(() =>
+  const [uncontrolledTheme, setUncontrolledTheme] = useState<ThemeMode>(() =>
     getInitialTheme(initialTheme, storageKey, persist)
   )
   const [systemTheme, setSystemTheme] = useState(resolveSystemTheme)
+  const theme = controlledTheme ?? uncontrolledTheme
 
   const resolvedTheme = useMemo(
     () => (theme === 'system' ? systemTheme : theme),
     [systemTheme, theme]
+  )
+
+  const setTheme = useCallback(
+    (nextTheme: ThemeMode) => {
+      if (controlledTheme === undefined) {
+        setUncontrolledTheme(nextTheme)
+      }
+
+      onThemeChange?.(nextTheme)
+    },
+    [controlledTheme, onThemeChange]
   )
 
   useEffect(() => {
@@ -80,7 +96,7 @@ export function ThemeProvider({
       resolvedTheme,
       setTheme,
     }),
-    [resolvedTheme, theme]
+    [resolvedTheme, setTheme, theme]
   )
 
   return <ThemeContext.Provider value={value}>{children}</ThemeContext.Provider>

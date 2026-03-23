@@ -7,7 +7,7 @@ Reusable React + TypeScript UI controls and design tokens for small SPA-style te
 - Theme foundation with `light`, `dark`, and `system` modes
 - App shell and top bar primitives
 - Overlay drawer primitives for left/right sidebars
-- Shared controls such as buttons, panels, banners, and form fields
+- Shared controls such as buttons, panels, banners, form fields, and a settings trigger
 - A theme toggle wired to the shared theme context
 
 ## Development
@@ -33,16 +33,29 @@ npm run test:run
 
 ```tsx
 import {
-  ThemeProvider,
-  ThemeToggle,
   AppShell,
   TopBar,
   Panel,
+  SettingsButton,
+  ThemeProvider,
+  ThemeToggle,
 } from '@mattgotteiner/spa-ui-controls'
 import '@mattgotteiner/spa-ui-controls/styles.css'
 ```
 
-Wrap your app with `ThemeProvider`, then use `ThemeToggle` and the shell primitives to keep layout and appearance consistent across apps.
+Wrap your app with `ThemeProvider`, then use `ThemeToggle`, `SettingsButton`, and the shell primitives to keep layout and appearance consistent across apps.
+
+If your app already persists theme state elsewhere, `ThemeProvider` also supports a controlled mode:
+
+```tsx
+<ThemeProvider
+  theme={settings.theme}
+  onThemeChange={(nextTheme) => updateSettings({ theme: nextTheme })}
+  persist={false}
+>
+  <App />
+</ThemeProvider>
+```
 
 ## Installing from GitHub Packages
 

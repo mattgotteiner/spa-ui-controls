@@ -30,11 +30,11 @@
       "types": "./dist/index.d.ts",
       "import": "./dist/index.js"
     },
-    "./styles.css": "./dist/style.css"
+    "./styles.css": "./dist/index.css"
   },
   "scripts": {
     "dev": "vite",
-    "build": "tsc -p tsconfig.build.json && vite build",
+    "build": "vite build && tsc -p tsconfig.build.json",
     "lint": "eslint .",
     "test": "vitest",
     "test:run": "vitest run",
