@@ -38,32 +38,9 @@ function DemoSurface() {
         </div>
       </Sidebar>
 
-      <SettingsDrawer
-        footer={
-          <div className="demo-drawer-footer">
-            <Button variant="secondary" onClick={() => setIsSettingsOpen(false)}>
-              Close
-            </Button>
-            <Button onClick={() => setIsSettingsOpen(false)}>Save defaults</Button>
-          </div>
-        }
-        isOpen={isSettingsOpen}
-        onClose={() => setIsSettingsOpen(false)}
-      >
+      <SettingsDrawer isOpen={isSettingsOpen} onClose={() => setIsSettingsOpen(false)}>
         <FormField hint="Keep theme handling identical across all apps." label="Theme">
           <ThemeToggle onChange={setTheme} value={theme} />
-        </FormField>
-
-        <FormField hint="Settings-specific controls stay app-owned." htmlFor="demo-endpoint" label="Example input">
-          <input className="spa-input" id="demo-endpoint" placeholder="https://example.internal" type="url" />
-        </FormField>
-
-        <FormField htmlFor="demo-mode" label="Example select">
-          <select className="spa-input" id="demo-mode" defaultValue="balanced">
-            <option value="balanced">Balanced</option>
-            <option value="compact">Compact</option>
-            <option value="dense">Dense</option>
-          </select>
         </FormField>
       </SettingsDrawer>
 
@@ -79,8 +56,7 @@ function DemoSurface() {
             title="spa-ui-controls"
             trailing={
               <div className="demo-topbar-actions">
-                <ThemeToggle onChange={setTheme} value={theme} />
-                <SettingsButton variant="topbar" onClick={() => setIsSettingsOpen(true)} />
+                <SettingsButton onClick={() => setIsSettingsOpen(true)} />
               </div>
             }
           />
@@ -111,19 +87,16 @@ function DemoSurface() {
 
           <Panel>
             <div className="demo-section-header">
-              <h2>Theme and sidebar controls</h2>
-              <p>Built from the common patterns in `text-audio` and `responses-chat-2`.</p>
+              <h2>Sidebar controls</h2>
+              <p>Open the shared left nav or the settings drawer that now owns theme selection.</p>
             </div>
-            <div className="demo-stack">
-              <ThemeToggle onChange={setTheme} value={theme} />
-              <div className="demo-button-row">
-                <Button variant="secondary" onClick={() => setIsNavigationOpen(true)}>
-                  Open left sidebar
-                </Button>
-                <Button variant="secondary" onClick={() => setIsSettingsOpen(true)}>
-                  Open settings drawer
-                </Button>
-              </div>
+            <div className="demo-button-row">
+              <Button variant="secondary" onClick={() => setIsNavigationOpen(true)}>
+                Open left sidebar
+              </Button>
+              <Button variant="secondary" onClick={() => setIsSettingsOpen(true)}>
+                Open settings drawer
+              </Button>
             </div>
           </Panel>
 
