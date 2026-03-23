@@ -13,7 +13,7 @@ export interface SettingsDrawerProps {
 
 export function SettingsDrawer({
   children,
-  description = 'Configure app-level settings and preferences.',
+  description,
   footer,
   isOpen,
   onClose,
