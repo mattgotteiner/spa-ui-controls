@@ -22,4 +22,12 @@ describe('SettingsButton', () => {
 
     expect(container.querySelector('.spa-settings-button__badge')).toBeInTheDocument()
   })
+
+  it('adds the topbar variant class when requested', () => {
+    render(<SettingsButton variant="topbar" />)
+
+    expect(screen.getByRole('button', { name: 'Open settings' })).toHaveClass(
+      'spa-settings-button--topbar',
+    )
+  })
 })

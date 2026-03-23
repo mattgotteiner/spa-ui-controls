@@ -7,17 +7,23 @@ export interface SettingsButtonProps
   extends Omit<ComponentPropsWithoutRef<typeof IconButton>, 'children' | 'label'> {
   label?: string
   showBadge?: boolean
+  variant?: 'default' | 'topbar'
 }
 
 export function SettingsButton({
   className,
   label = 'Open settings',
   showBadge = false,
+  variant = 'default',
   ...props
 }: SettingsButtonProps) {
   return (
     <IconButton
-      className={cx('spa-settings-button', className)}
+      className={cx(
+        'spa-settings-button',
+        variant === 'topbar' && 'spa-settings-button--topbar',
+        className,
+      )}
       label={label}
       {...props}
     >

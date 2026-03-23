@@ -45,6 +45,15 @@ import '@mattgotteiner/spa-ui-controls/styles.css'
 
 Wrap your app with `ThemeProvider`, then use `ThemeToggle`, `SettingsButton`, and the shell primitives to keep layout and appearance consistent across apps.
 
+For the boxed top-bar treatment used in apps like `tokenizer`, opt into the shared header style directly:
+
+```tsx
+<TopBar
+  title="My app"
+  trailing={<SettingsButton variant="topbar" onClick={() => setIsSettingsOpen(true)} />}
+/>
+```
+
 If your app already persists theme state elsewhere, `ThemeProvider` also supports a controlled mode:
 
 ```tsx
