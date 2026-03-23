@@ -6,6 +6,9 @@
 
   --spa-font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
     "Helvetica Neue", Arial, sans-serif;
+  --spa-font-size-sm: 0.875rem;
+  --spa-font-size-md: 1rem;
+  --spa-font-size-lg: 1.125rem;
 
   --spa-space-1: 0.25rem;
   --spa-space-2: 0.5rem;
