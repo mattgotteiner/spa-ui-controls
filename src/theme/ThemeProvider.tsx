@@ -1,13 +1,12 @@
 import { useCallback, useEffect, useMemo, useState, type ReactNode } from 'react'
 import { applyThemeClass } from './applyThemeClass'
 import { ThemeContext } from './ThemeContext'
+import {
+  DEFAULT_THEME_STORAGE_KEY,
+  getInitialTheme,
+  syncStoredTheme,
+} from './themeStorage'
 import type { ResolvedTheme, ThemeMode } from './types'
-
-const DEFAULT_STORAGE_KEY = 'spa-ui-controls-theme'
-
-function isThemeMode(value: unknown): value is ThemeMode {
-  return value === 'light' || value === 'dark' || value === 'system'
-}
 
 function resolveSystemTheme(): ResolvedTheme {
   if (typeof window === 'undefined') {
@@ -15,15 +14,6 @@ function resolveSystemTheme(): ResolvedTheme {
   }
 
   return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light'
-}
-
-function getInitialTheme(initialTheme: ThemeMode, storageKey: string, persist: boolean): ThemeMode {
-  if (!persist || typeof window === 'undefined') {
-    return initialTheme
-  }
-
-  const storedValue = window.localStorage.getItem(storageKey)
-  return isThemeMode(storedValue) ? storedValue : initialTheme
 }
 
 export interface ThemeProviderProps {
@@ -40,7 +30,7 @@ export function ThemeProvider({
   initialTheme = 'system',
   onThemeChange,
   persist = true,
-  storageKey = DEFAULT_STORAGE_KEY,
+  storageKey = DEFAULT_THEME_STORAGE_KEY,
   theme: controlledTheme,
 }: ThemeProviderProps) {
   const [uncontrolledTheme, setUncontrolledTheme] = useState<ThemeMode>(() =>
@@ -67,12 +57,7 @@ export function ThemeProvider({
 
   useEffect(() => {
     applyThemeClass(document.documentElement, theme)
-
-    if (persist) {
-      window.localStorage.setItem(storageKey, theme)
-    } else {
-      window.localStorage.removeItem(storageKey)
-    }
+    syncStoredTheme(theme, storageKey, persist)
   }, [persist, storageKey, theme])
 
   useEffect(() => {

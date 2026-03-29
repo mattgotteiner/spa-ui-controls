@@ -39,9 +39,12 @@ import {
   SettingsButton,
   ThemeProvider,
   ThemeToggle,
+  useThemePreference,
 } from '@mattgotteiner/spa-ui-controls'
 import '@mattgotteiner/spa-ui-controls/styles.css'
 ```
+
+The package ships its own TypeScript declarations, so consumers should not need a local shim for normal usage.
 
 Wrap your app with `ThemeProvider`, then use `ThemeToggle`, `SettingsButton`, and the shell primitives to keep layout and appearance consistent across apps. `SettingsButton` now ships with the boxed treatment by default, so consumers do not need a special top-bar variant:
 
@@ -52,7 +55,7 @@ Wrap your app with `ThemeProvider`, then use `ThemeToggle`, `SettingsButton`, an
 />
 ```
 
-If your app already persists theme state elsewhere, `ThemeProvider` also supports a controlled mode:
+If your app already persists theme state elsewhere, `ThemeProvider` supports a controlled mode:
 
 ```tsx
 <ThemeProvider
@@ -63,6 +66,30 @@ If your app already persists theme state elsewhere, `ThemeProvider` also support
   <App />
 </ThemeProvider>
 ```
+
+For apps that want controlled theme state without hand-rolling storage wiring, the package also exposes `useThemePreference`. It provides the `value` / `onChange` contract used by `ThemeToggle` while keeping persistence in one place:
+
+```tsx
+function AppRoot() {
+  const themePreference = useThemePreference()
+
+  return (
+    <ThemeProvider
+      theme={themePreference.value}
+      onThemeChange={themePreference.onChange}
+      persist={false}
+    >
+      <ThemeToggle
+        value={themePreference.value}
+        onChange={themePreference.onChange}
+      />
+      <App />
+    </ThemeProvider>
+  )
+}
+```
+
+`useThemePreference` also listens for `localStorage` updates, so theme changes can stay aligned across tabs when multiple app instances are open.
 
 ## Installing from GitHub Packages
 
