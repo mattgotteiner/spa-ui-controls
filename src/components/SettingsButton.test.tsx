@@ -25,4 +25,10 @@ describe('SettingsButton', () => {
     expect(container.querySelector('.spa-settings-button__badge')).toBeInTheDocument()
   })
 
+  it('does not render a badge by default', () => {
+    const { container } = render(<SettingsButton />)
+
+    expect(container.querySelector('.spa-settings-button__badge')).not.toBeInTheDocument()
+  })
+
 })

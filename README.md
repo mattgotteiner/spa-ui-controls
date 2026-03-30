@@ -55,6 +55,20 @@ Wrap your app with `ThemeProvider`, then use `ThemeToggle`, `SettingsButton`, an
 />
 ```
 
+Apps can surface missing required settings with the same red-dot indicator used by `responses-chat` by driving the existing `showBadge` prop from app-owned configuration state:
+
+```tsx
+<TopBar
+  title="My app"
+  trailing={
+    <SettingsButton
+      onClick={() => setIsSettingsOpen(true)}
+      showBadge={!isConfigured}
+    />
+  }
+/>
+```
+
 If your app already persists theme state elsewhere, `ThemeProvider` supports a controlled mode:
 
 ```tsx
