@@ -145,38 +145,46 @@
 
 .spa-settings-button {
   align-items: center;
-  background-color: transparent;
+  background: transparent;
   border: 1px solid var(--spa-color-border);
   border-radius: var(--spa-radius-md);
-  color: var(--spa-color-text-secondary);
   cursor: pointer;
   display: inline-flex;
   height: 40px;
   justify-content: center;
   padding: 8px;
   position: relative;
+  transition:
+    background-color 0.2s,
+    border-color 0.2s;
   width: 40px;
 }
 
-.spa-settings-button:hover:not(:disabled) {
-  background-color: var(--spa-color-surface);
-  border-color: var(--spa-color-border-muted);
-  color: var(--spa-color-text);
-}
-
 .spa-settings-button__icon {
+  color: var(--spa-color-text-secondary);
   height: 20px;
   width: 20px;
 }
 
 .spa-settings-button__badge {
   background-color: var(--spa-color-danger);
-  border-radius: 999px;
+  border-radius: var(--spa-radius-round);
   height: 8px;
   position: absolute;
   right: 6px;
   top: 6px;
   width: 8px;
+}
+
+@media (hover: hover) {
+  .spa-settings-button:hover:not(:disabled) {
+    background-color: var(--spa-color-surface);
+    border-color: var(--spa-color-border-muted);
+  }
+
+  .spa-settings-button:hover:not(:disabled) .spa-settings-button__icon {
+    color: var(--spa-color-text);
+  }
 }
 
 .spa-panel {

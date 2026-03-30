@@ -15,6 +15,7 @@ import './demo.css'
 function DemoSurface() {
   const [isNavigationOpen, setIsNavigationOpen] = useState(false)
   const [isSettingsOpen, setIsSettingsOpen] = useState(false)
+  const [isConfigured, setIsConfigured] = useState(false)
   const { resolvedTheme, setTheme, theme } = useTheme()
 
   return (
@@ -42,6 +43,31 @@ function DemoSurface() {
         <FormField hint="Keep theme handling identical across all apps." label="Theme">
           <ThemeToggle onChange={setTheme} value={theme} />
         </FormField>
+        <FormField
+          hint="Consuming apps decide which required settings matter; this package only reflects the state."
+          label="Required settings"
+        >
+          <div className="demo-stack">
+            <p className="demo-helper">
+              When required settings are missing, the settings button shows the same red
+              badge used in responses-chat.
+            </p>
+            <div className="demo-button-row">
+              <Button
+                variant={isConfigured ? 'secondary' : 'primary'}
+                onClick={() => setIsConfigured(true)}
+              >
+                Mark configured
+              </Button>
+              <Button
+                variant={isConfigured ? 'danger' : 'secondary'}
+                onClick={() => setIsConfigured(false)}
+              >
+                Mark missing
+              </Button>
+            </div>
+          </div>
+        </FormField>
       </SettingsDrawer>
 
       <AppShell
@@ -56,7 +82,10 @@ function DemoSurface() {
             title="spa-ui-controls"
             trailing={
               <div className="demo-topbar-actions">
-                <SettingsButton onClick={() => setIsSettingsOpen(true)} />
+                <SettingsButton
+                  onClick={() => setIsSettingsOpen(true)}
+                  showBadge={!isConfigured}
+                />
               </div>
             }
           />
